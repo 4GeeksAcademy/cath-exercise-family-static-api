@@ -52,9 +52,13 @@ class FamilyStructure:
     def delete_member(self, id):
         # You have to implement this method
         # Loop the list and delete the member with the given id
+        initial_member_count = len(self._members)
         self._members = [
             member for member in self._members if member['id'] != id]
-        return
+
+        is_deleted = len(self._members) == initial_member_count - 1
+
+        return is_deleted
 
     def get_member(self, id):
         # You have to implement this method

@@ -39,6 +39,11 @@ def get_family():
 @app.route('/members/<int:id>', methods=['GET'])
 def get_member(id):
     member = jackson_family.get_member(int(id))
+    print(member)
+
+    if len(member) == 0:
+        return jsonify({"error": "Member not found"}), 404
+
     return jsonify(member[0]), 200
 
 
@@ -78,7 +83,11 @@ def add_member():
 
 @app.route('/members/<int:id>', methods=['DELETE'])
 def delete_member(id):
-    jackson_family.delete_member(int(id))
+    deleted = jackson_family.delete_member(int(id))
+
+    if not deleted:
+        return jsonify({"error": "Member not found"}), 404
+
     return jsonify({'done': True}), 200
 
 
