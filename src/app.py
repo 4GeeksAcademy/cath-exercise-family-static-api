@@ -39,7 +39,6 @@ def get_family():
 @app.route('/members/<int:id>', methods=['GET'])
 def get_member(id):
     member = jackson_family.get_member(int(id))
-    print(member)
 
     if len(member) == 0:
         return jsonify({"error": "Member not found"}), 404
